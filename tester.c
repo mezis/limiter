@@ -1,6 +1,6 @@
 /*****************************************************************************
  *
- * limiter --
+ * tester --
  *
  * A program that leaks a lot of memory, but not too fast.
  * 10MB / sec.
@@ -9,10 +9,12 @@
  *
  *****************************************************************************/
 
+#include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-#define kBYTES 1000000 /* bytes to allocate on each cycle */
-#define kSLEEP 100000 /* sleep time in us between cycles */
+#define kBYTES 1000 /* bytes to allocate on each cycle */
+#define kSLEEP 100 /* sleep time in us between cycles */
 
 int main(int argc, char** argv)
 {
