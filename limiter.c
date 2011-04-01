@@ -354,10 +354,13 @@ void monitor(pid_t child)
     /* examine child termination */
     if (WIFEXITED(status)) {
         fprintf(stderr, "Child exited normally with status %d\n", WEXITSTATUS(status));
+        exit(WEXITSTATUS(status));
     } else if (WIFSIGNALED(status)) {
         fprintf(stderr, "Child was killed with signal %d\n", WTERMSIG(status));
+        exit(1);
     } else {
         fprintf(stderr, "Child exited abnormally.\n");
+        exit(2);
     }
     return;
 }
