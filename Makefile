@@ -4,7 +4,7 @@ CFLAGS += -Os -DNDEBUG
 
 PROGS = limiter tester
 
-all: limiter .limiter-setuid
+all: $(PROGS) .limiter-setuid
     
 limiter: limiter.o Hashtable.o
 tester: tester.o
@@ -17,4 +17,4 @@ tester: tester.o
 
 clean:
 	rm -f *.o 
-	sudo rm $(PROGS)
+	sudo rm -f $(PROGS)
