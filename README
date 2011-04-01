@@ -1,0 +1,13 @@
+
+limiter [options] program [args]
+
+    Run <program> and regularly check that it doesn't exceed
+    given CPU time and resident set size limits (taking all its
+    offspring into account)
+
+    Options:
+      -m <megabytes>     limit per-offspring memory usage (default 1GB)
+      -t <milliseconds>  limit per-offspring cpu time (default 1 hour)
+      -M <megabytes>     limit global memory usage (default 1GB)
+      -T <milliseconds>  limit global cpu time (default 1 hour)
+      -i <interval>      sampling interval (default 100ms)
