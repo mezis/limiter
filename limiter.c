@@ -264,11 +264,11 @@ void check_child(int pid, void* value, void* data)
 
     /* check per-child limits */
     if (pinfo->cpu_time > gMaxCPUPerChild) {
-        fprintf(stderr, "Per-child CPU time limit exceeded.\n");
+        fprintf(stderr, "Per-child CPU time limit exceeded by PID %d.\n", pid);
         seppuku = true;
     }
     if (pinfo->resident_memory > gMaxMemoryPerChild) {
-        fprintf(stderr, "Per-child Resident memory limit exceeded.\n");
+        fprintf(stderr, "Per-child resident memory limit exceeded by PID %d.\n", pid);
         seppuku = true;
     }
     if (seppuku) kill_child(pid, NULL, NULL);
@@ -438,7 +438,12 @@ int main(int argc, char** argv)
     
     /* show limits */
     if (gVerbose>=1) {
-        fprintf(stderr, "Current limits : %llu MB memory, %llu CPU ms.\n", gMaxMemory/(1024*1024), gMaxCPU/1000);
+        fprintf(stderr, "Current limits : \n"
+            "- global: %llu MB memory, %llu CPU ms.\n"
+            "- per-child: %llu MB memory, %llu CPU ms.\n",
+            gMaxMemory/(1024*1024), gMaxCPU/1000,
+            gMaxMemoryPerChild/(1024*1024), gMaxCPUPerChild/1000
+            );
     }
 
     /* fork child and monitor */
